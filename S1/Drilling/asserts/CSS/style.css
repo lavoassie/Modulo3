@@ -1,0 +1,33 @@
+body {
+    background-image: linear-gradient(to right, rgb(14, 69, 169), rgb(84, 184, 215));
+}
+
+#div_ingresarDatos{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin: 1rem;
+    padding: 1rem;
+    text-align: center;
+}
+
+input{
+    background-color: rgb(247, 247, 247);
+    border: rgb(247, 247, 247);
+    padding: 8px;
+}
+input::placeholder{
+    font-size: 12px;
+}
+
+#inscribirse{
+    color: white;
+    background-color: rgb(33, 147, 179);
+    height: 40px;
+    width: 180px;
+    border:rgb(33, 147, 179)
+}
+
+#parrafo{
+    font-size: 12px;
+}
