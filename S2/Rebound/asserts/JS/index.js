@@ -1,6 +1,7 @@
 
 // Obtiene el valor de cualquier botón
 function getValue(buttonValue) {
+  console.log(buttonValue);
   var key = document.getElementById(buttonValue).innerHTML;
   var screen = document.getElementById("screen").value;
   document.getElementById('screen').value = screen + key;
@@ -31,4 +32,29 @@ function solve() {
   console.log("solve " + eval(screen))
   var screen = document.getElementById("screen").value = eval(screen);
 
+}
+
+//Duda, ahora debo agregar las operaciones aritméticas?
+
+function calcular() {
+  let resultado;
+  const anterior = parseFloat(operacionAnterior);
+  const actual = parseFloat(operacionActual);
+  if (isNaN(anterior) || isNaN(actual)) return;
+  switch (operacion) {
+    case '+':
+      resultado = anterior + actual;
+      break;
+    case '-':
+      resultado = anterior - actual;
+      break;
+    case 'x':
+      resultado = anterior * actual;
+      break;
+    case '÷':
+      resultado = anterior / actual;
+      break;
+    default:
+      return;
+  }
 }
