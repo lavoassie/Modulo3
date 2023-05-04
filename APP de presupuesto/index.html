@@ -18,18 +18,18 @@
             <div class="card" style="width: 18rem;">
                 <div class="card-body">
                     <h5 class="card-title">Ingresa Tu Presupuesto</h5>
-                    <input type="number" id="presupuesto">
-                    <a href="#" id="presupuesto" class="btn btn-primary mt-1">Calcular</a>
+                    <input type="number" id="inputPresupuesto">
+                    <button class="btn btn-primary mt-1" id="botonPresupuesto">Calcular</button>
                 </div>
             </div>
             <br>
             <div class="card" style="width: 18rem;">
                 <div class="card-body">
                     <h5 class="card-title">Ingresa el nombre del gasto</h5>
-                    <input type="text">
+                    <input type="text" id="inputName">
                     <h5 class="card-title">Ingresa la cantidad del gasto</h5>
-                    <input type="text">
-                    <a href="#" id="buttonAdd" class="btn btn-primary mt-1">Añadir gasto</a>
+                    <input type="text" id="inputValor">
+                    <button id="buttonAdd" class="btn btn-primary mt-1">Añadir gasto</button>
                 </div>
             </div>
         </div>
@@ -38,9 +38,9 @@
                     <div>Presupuesto</div>
                     <div>Gasto</div>
                     <div>Saldo</div>
-                    <p id="totalPresupuesto">0 CLP</p>
-                    <p id="gasto">0 CLP</p>
-                    <p id="saldo">0 CLP</p>
+                    <p id="totalPresupuesto">$ 0</p>
+                    <p id="gasto">$ 0</p>
+                    <p id="saldo">$ 0</p>
                 </div>
             </div>
         <hr>
@@ -49,6 +49,9 @@
             <div id="grid2">
                 <div>Gasto</div>
                 <div>Valor</div>
+                <br>
+                <p id="nombreGasto"></p>
+                <p id="valorGasto"></p>
             </div>
         </div>
     </div>
