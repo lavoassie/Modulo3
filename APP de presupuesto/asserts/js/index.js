@@ -7,6 +7,10 @@
 //Mostrar el saldo final
 //Mostrar una lista de gastos que ingresa el usuario
 
+function Gasto(nombre,monto){
+    this.nombre = nombre;
+    this.monto = monto;
+};
 
 let nombresGastos = [];
 let montosGastos = [];
@@ -14,7 +18,6 @@ let montosGastos = [];
 let inputPresupuesto = document.getElementById("inputPresupuesto");
 let botonPresupuesto = document.getElementById("btnCalcular");
 let presupuesto = document.getElementById("presupuesto");
-let html = "";
 
 botonPresupuesto.addEventListener("click", function(){
     let capturandoPresupuesto = inputPresupuesto.value.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ".")
@@ -29,11 +32,19 @@ let gasto = document.getElementById("gasto");
 let monto = document.getElementById("monto");
 
 let tabla = document.getElementById("bodyTabla");
+let totalGastos = document.getElementById("totalGastos");
 
 botonAgregar.addEventListener("click", function(){
     let capturaNombreGasto = inputNombreGasto.value;
     let capturaMontoGasto = inputMontoGasto.value;
     nombresGastos.push(capturaNombreGasto);
     montosGastos.push(capturaMontoGasto);
-    tabla.innerHTML += "<li>" + capturaNombreGasto + " / " + capturaMontoGasto + "</li>";
+    tabla.innerHTML += "<li>" + capturaNombreGasto + " - " + capturaMontoGasto + "</li>";
 });
+
+function presupuestoFinal(saldo,gasto){
+    resultado = saldo - gasto;
+    // return resultado
+    console.log(resultado)
+}
+presupuestoFinal(3,4)
