@@ -1,50 +1,77 @@
-//[x]Capturar el presupuesto del cliente
-//  [x]Capturar el valor del input al ejecutar el botón Calcular
-//  [x]Crear variables que van a obtener el valor de los inputy botones
-//  [x]Que el presupuesto se vea proyectado en la parte derecha "presupuesto"
-//Capturar el nombre del gasto y la cantidad al hacer click en el botón añadir gasto
-//  que este valor se vea reflejado en los elementos GASTOS del lado derecho
-//Mostrar el saldo final
-//Mostrar una lista de gastos que ingresa el usuario
 
 function Gasto(nombre,monto){
     this.nombre = nombre;
     this.monto = monto;
 };
 
-let nombresGastos = [];
-let montosGastos = [];
-//Capturar el presupuesto del cliente
-let inputPresupuesto = document.getElementById("inputPresupuesto");
-let botonPresupuesto = document.getElementById("btnCalcular");
-let presupuesto = document.getElementById("presupuesto");
 
-botonPresupuesto.addEventListener("click", function(){
-    let capturandoPresupuesto = inputPresupuesto.value.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ".")
-    presupuesto.innerHTML = capturandoPresupuesto;
+let listaGastos = [];
+
+function agregarGasto(nombre,monto) {
+    let gasto = new Gasto(nombre,monto);
+    listaGastos.push(gasto);
+    let computoSaldo = actualizarSaldo();
+    if(computoSaldo < 0){
+        listaGastos.pop();
+        alert("Agrega saldo a tu cuenta.")
+    } else {
+        let gastoActualizado = listaGastos.reduce((acumulador,valorActual) => acumulador + valorActual.monto, 0);
+        totalGastos.innerHTML = String(gastoActualizado).replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    };
+    actualizarSaldo();
+}
+
+function actualizarTabla(){
+    let html = "";
+    listaGastos.forEach((gasto,index) => {
+        html += `
+        <tr>
+            <td>${gasto.nombre}</td>
+            <td>${gasto.monto}</td>
+            <td style="cursor: pointer;"><i class="fa-solid fa-trash" onclick="eliminar(${index})"></i></td>
+        </tr>
+        `
+    })
+    bodyTabla.innerHTML = html;
+    actualizarSaldo();
+}
+
+function eliminar(index){
+    listaGastos = listaGastos.filter((gasto,indice) => indice != index);
+    let gastoActualizado = listaGastos.reduce((acumulador,valorActual) => acumulador + valorActual.monto, 0);
+    totalGastos.innerHTML = String(gastoActualizado).replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    actualizarTabla();
+}
+
+
+function actualizarSaldo(){
+    let pptoResumen = presupuesto.innerHTML.replaceAll(".","");
+    let gastosResumen = listaGastos.reduce((acumulador,valorActual) => acumulador + valorActual.monto,0);
+    let nuevoSaldo = String(pptoResumen - gastosResumen);
+    saldo.innerText = nuevoSaldo.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    return nuevoSaldo;
+}
+
+let btnCalcular = document.getElementById("btnCalcular");
+let inputPresupueto = document.getElementById("inputPresupueto");
+let presupuesto = document.getElementById("presupuesto");
+let totalGastos = document.getElementById("totalGastos");
+let saldo = document.getElementById("saldo");
+let btnAnadir = document.getElementById("btnAnadir");
+
+btnCalcular.addEventListener('click', function() {
+    presupuesto.innerHTML = inputPresupueto.value.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    actualizarSaldo();
+    presupuesto.innerHTML > 0 ? btnAnadir.removeAttribute("disabled") : btnAnadir.setAttribute("disable",true);
 })
 
-//Capturar el nombre del gasto y la cantidad al hacer click en el botón añadir gasto
 let inputNombreGasto = document.getElementById("inputNombreGasto");
 let inputMontoGasto = document.getElementById("inputMontoGasto");
-let botonAgregar = document.getElementById("btnAnadir");
-let gasto = document.getElementById("gasto");
-let monto = document.getElementById("monto");
+let bodyTabla = document.getElementById("bodyTabla");
 
-let tabla = document.getElementById("bodyTabla");
-let totalGastos = document.getElementById("totalGastos");
-
-botonAgregar.addEventListener("click", function(){
-    let capturaNombreGasto = inputNombreGasto.value;
-    let capturaMontoGasto = inputMontoGasto.value;
-    nombresGastos.push(capturaNombreGasto);
-    montosGastos.push(capturaMontoGasto);
-    tabla.innerHTML += "<li>" + capturaNombreGasto + " - " + capturaMontoGasto + "</li>";
-});
-
-function presupuestoFinal(saldo,gasto){
-    resultado = saldo - gasto;
-    // return resultado
-    console.log(resultado)
-}
-presupuestoFinal(3,4)
+btnAnadir.addEventListener('click', function() {
+    let nombre = inputNombreGasto.value;
+    let monto = parseInt(inputMontoGasto.value);
+    agregarGasto(nombre,monto);
+    actualizarTabla();
+})

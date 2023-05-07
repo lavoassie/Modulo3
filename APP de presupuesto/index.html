@@ -11,9 +11,8 @@
 </head>
 
 <body>
-
     <header>
-        <h1>APP PRESUPUESTO </h1>
+        <h1>APP PRESUPUESTO</h1>
     </header>
 
     <main>
@@ -23,9 +22,9 @@
                 <div class="m-2 p-2 bg-success-subtle bg-opacity-10 border border-2 border-success rounded">
                     <form>
                         <div class="mb-3">
-                            <label for="inputPresupuesto" class="form-label">Ingresa tu Presupuesto</label>
+                            <label for="inputPresupueto" class="form-label">Ingresa tu Presupuesto</label>
                             <input type="number" class="form-control bg-success-subtle border border-secondary-subtle"
-                                id="inputPresupuesto">
+                                id="inputPresupueto">
                         </div>
                         <button id="btnCalcular" type="button" class="btn btn-outline-success">Calcular</button>
                     </form>
@@ -43,7 +42,7 @@
                             <input type="number" class="form-control bg-danger-subtle border border-secondary-subtle"
                                 id="inputMontoGasto">
                         </div>
-                        <button id="btnAnadir" type="button" class="btn btn-outline-danger">Añadir Gasto</button>
+                        <button id="btnAnadir" type="button" class="btn btn-outline-danger" disabled>Añadir Gasto</button>
                     </form>
                 </div>
             </section>
@@ -69,10 +68,10 @@
                         <tr>
                             <th scope="col">GASTO</th>
                             <th scope="col">VALOR</th>
+                            <th scope="col"></th>
                         </tr>
                     </thead>
                     <tbody id="bodyTabla">
-                        <p id="papelera"></p>
                     </tbody>
                 </table>
             </section>
@@ -86,5 +85,4 @@
         crossorigin="anonymous"></script>
     <script src="./asserts/js/index.js"></script>
 </body>
-
 </html>
